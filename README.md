@@ -5,37 +5,43 @@ Bu depo, Texas Instruments **MSP430G2553** (Launchpad) mikrodenetleyicisi kullan
 
 
 
-## 🚀 Proje İçerikleri
+# 📟 MSP430 Microcontroller & Industrial CANBus Projects
 
-### 💡 Temel I/O ve Kesme İşlemleri
-Mikrodenetleyicinin giriş-çıkış pinlerini ve donanımsal kesme (Interrupt) mekanizmalarını kapsar.
-* **Led Blinking:** Dahili LED'lerin belirli zaman aralıklarıyla yakılıp söndürülmesi.
-* **Button Control:** Buton girişi ile LED durumunun kontrol edilmesi ve Polling/Interrupt yöntemlerinin farkları.
-* **Software Debouncing:** Buton arkı (bouncing) sorununu gidermek için yazılımsal gecikme algoritmaları.
+Bu depo, Texas Instruments **MSP430G2553** mikrodenetleyicisi kullanılarak geliştirilmiş temel gömülü sistem uygulamalarının yanı sıra, **Nurol Makina** bünyesindeki ortak eğitim sürecinde gerçekleştirilen endüstriyel haberleşme (CANBus) projelerini içermektedir.
 
-### ⏱️ Zamanlayıcı ve PWM Uygulamaları
-Timer birimlerini kullanarak hassas zamanlama ve sinyal üretimi sağlar.
-* **Timer Interrupts:** İşlemciyi meşgul etmeden (non-blocking) belirli periyotlarda görevlerin icra edilmesi.
-* **LED Fading (PWM):** Donanımsal PWM kullanarak bir LED'in parlaklığının yumuşak bir şekilde artırılıp azaltılması.
-* **Morse Code:** Timer kesmeleri kullanarak girilen metnin Mors alfabesiyle LED üzerinden sinyalleştirilmesi.
 
-### 📡 Haberleşme ve Sensör Entegrasyonu
-Dış dünya ve diğer cihazlarla veri alışverişi sağlayan protokol uygulamalarıdır.
-* **UART Echo:** Bilgisayar ile seri haberleşme kurarak gelen verilerin geri gönderilmesi.
-* **ADC Test:** Dahili sıcaklık sensöründen veya potansiyometreden gelen analog sinyallerin dijital veriye dönüştürülmesi.
-* **Timer Capture:** Dışarıdan gelen bir sinyalin frekansını veya periyodunu donanımsal yakalama (Capture) modu ile ölçme.
 
-## 🛠️ Teknik Detaylar
-* **Mikrodenetleyici:** MSP430G2553
+## 🏗️ Öne Çıkan Proje: Endüstriyel CANBus Haberleşmesi
+Bu çalışma, askeri araç elektroniği standartlarında kullanılan CANBus protokolünün MSP430 üzerinde gerçeklenmesini kapsar.
+
+* **Donanım:** MSP430G2553 ve SPI arayüzü üzerinden haberleşen **MCP2515 CAN Controller**.
+* **Haberleşme Ağı:** SPC560 (PeakCAN) sisteminden gelen CAN mesajlarının algılanması, ID tabanlı filtrelenmesi ve yanıtlanması.
+* **Protokol Detayları:** * SPI üzerinden MCP2515 konfigürasyonu.
+    * Standart ve Genişletilmiş (Extended) ID takibi.
+    * Farklı baudrate değerlerinde (250kbps/500kbps) kararlı veri iletimi.
+* **Uygulama:** Araç üzerindeki farklı kontrol ünitelerinin (ECU) simülasyonu ve mesaj trafik analizi.
+
+## 🚀 Diğer Uygulamalar
+
+### ⏱️ Zamanlayıcı ve Kesme Yönetimi
+* **Non-Blocking Programlama:** `__bis_SR_register(LPM0_bits + GIE)` kullanarak düşük güç tüketimi ve kesme tabanlı (Interrupt) mimari.
+* **PWM Sinyal Üretimi:** Timer_A birimi ile motor sürücü veya LED parlaklık kontrolü.
+* **Debouncing:** Buton arklarını önleyen yazılımsal filtreleme algoritmaları.
+
+### 📡 Çevre Birimleri (Peripherals)
+* **UART:** Bilgisayar arayüzü ile veri terminali üzerinden haberleşme (Baudrate senkronizasyonu).
+* **ADC10:** Dahili veya harici analog verilerin 10-bit çözünürlükle işlenmesi.
+* **SPI/I2C:** Sensör ve haberleşme modülleriyle (MCP2515 vb.) senkron veri aktarımı.
+
+## 🛠️ Teknik Bilgiler
+* **Mikrodenetleyici:** TI MSP430G2553 (Ultra-Low Power)
 * **Geliştirme Ortamı:** Code Composer Studio (CCS)
-* **Programlama Dili:** C
-* **Donanım:** MSP-EXP430G2 LaunchPad
+* **Dil:** Embedded C
+* **Donanım:** MSP-EXP430G2 LaunchPad & MCP2515 CAN Board
 
-## 🔌 Kurulum ve Kullanım
-1. **IDE Kurulumu:** Texas Instruments'ın sağladığı Code Composer Studio'yu yükleyin.
-2. **Proje Aktarımı:** İlgili proje klasörlerini Workspace'inize import edin.
-3. **Derleme:** Projeyi derleyin ve USB üzerinden bağlı Launchpad kartınıza yükleyin.
-4. **Haberleşme:** UART projeleri için 9600 Baudrate değerinde bir seri terminal (Putty, Tera Term vb.) kullanın.
+## 🔌 Kullanım
+1. Projeyi CCS (Code Composer Studio) içerisine import edin.
+2. `main.c` dosyasındaki saat konfigürasyonunun (DCO) kartınıza uygun olduğundan emin olun.
+3. CANBus projeleri için MSP430 ve MCP2515 arasındaki SPI (MISO, MOSI, CLK, CS) bağlantılarını kontrol edin.
 
 ---
-*Bu çalışma Muhammed Halil Güler tarafından gömülü sistemler ve mikrodenetleyici mimarisi eğitimi kapsamında geliştirilmiştir.*
