@@ -1,4 +1,5 @@
 # 📟 MSP430 Microcontroller Projects
+![WhatsApp Görsel 2025-04-23 saat 21 01 10_a863c54c](https://github.com/user-attachments/assets/26a7a568-9ef1-4adc-a644-200ba72b88ec)
 
 Bu depo, Texas Instruments **MSP430G2553** (Launchpad) mikrodenetleyicisi kullanılarak geliştirilmiş çeşitli temel ve ileri seviye gömülü sistem uygulamalarını içermektedir. Projeler, mikrodenetleyici mimarisini anlamak ve çevre birimlerini (peripherals) kontrol etmek amacıyla hazırlanmıştır.
 
